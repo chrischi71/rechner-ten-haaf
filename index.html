@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+   <meta charset="UTF-8">
+   <title>Formelberechnung</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 20px;
+       }
+       label, input {
+           display: block;
+           margin-bottom: 10px;
+       }
+       input[type="number"] {
+           width: 100%;
+           padding: 8px;
+           box-sizing: border-box;
+       }
+       button {
+           padding: 10px 15px;
+           background-color: #007BFF;
+           color: white;
+           border: none;
+           cursor: pointer;
+       }
+       button:hover {
+           background-color: #0056b3;
+       }
+       #ergebnis {
+           margin-top: 20px;
+           font-weight: bold;
+       }
+   </style>
+</head>
+<body>
+   <h1>Formelberechnung</h1>
+   <form id="berechnungsFormular">
+       <label for="gewicht">Körpergewicht (kg):</label>
+       <input type="number" id="gewicht" name="gewicht" step="0.1" required>
+
+       <label for="groesse">Körpergröße (m):</label>
+       <input type="number" id="groesse" name="groesse" step="0.01" required>
+
+       <label for="alter">Alter (Jahre):</label>
+       <input type="number" id="alter" name="alter" required>
+
+       <button type="button" onclick="berechneErgebnis()">Berechnen</button>
+   </form>
+   <div id="ergebnis"></div>
+
+   <script>
+       function berechneErgebnis() {
+           // Eingabewerte aus dem Formular holen und in Gleitkommazahlen umwandeln
+           const gewicht = parseFloat(document.getElementById('gewicht').value);
+           const groesse = parseFloat(document.getElementById('groesse').value);
+           const alter = parseFloat(document.getElementById('alter').value);
+
+           // Überprüfen, ob die Eingaben gültige Zahlen sind
+           if (isNaN(gewicht) || isNaN(groesse) || isNaN(alter)) {
+               alert('Bitte geben Sie gültige Zahlen ein.');
+               return;
+           }
+
+           // Berechnung gemäß der Formel
+           const ergebnis = (11.936 * gewicht) + (527.728 * groesse) - (8.129 * alter) + 220.827;
+
+           // Ergebnis auf zwei Dezimalstellen runden und anzeigen
+           document.getElementById('ergebnis').innerText = 'Ergebnis: ' + ergebnis.toFixed(2);
+       }
+   </script>
+</body>
+</html>
